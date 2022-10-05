@@ -1,0 +1,38 @@
+/// Задача 47: Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+/// m = 3, n = 4.
+/// 0,5 7 -2 -0,2
+/// 1 -3,3 8 -9,9
+/// 8 7,8 -7,1 9
+
+/* Метод 'RandArr_x2' создает двумерный массив из случайных элементов вещественного типа
+ с одним знаком после запятой. Массив имеет 'mm' строк, 'nn' столбцов и границы 'xSt' и 'xFi' */
+float [,] RandArr_x2(int xSt, int xFi, int mm, int nn) {
+    float [,] arramat = new float [mm , nn];
+    Random rand = new Random(); 
+    for (int i = 0; i < mm; i++ )                { 
+        for (int j = 0; j < nn; j++ )          {
+            arramat[i , j] = rand.Next(xSt * 10, xFi * 10);
+            arramat[i , j] = arramat[i , j] / 10;} }
+return  arramat;                                         }
+//*****************************************
+/* Метод 'WriArr_x2' выводит двумерный массив 'arr_m' в консоль 
+                             и выравнивает элементы по столбцам*/
+void WriArr_x2(float[,] arr_m)                   {
+for (int i = 0; i < arr_m.GetLength(0); i++ )  {
+    for (int j = 0; j < arr_m.GetLength(1); j++ )  {
+        Console.Write("{0,5:0.0} ", arr_m[i , j]);  }
+        Console.WriteLine();                    } }
+//***************************************** 
+Console.Write("Введите количество строк:     ");    
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов:  ");    
+int n = Convert.ToInt32(Console.ReadLine());
+
+float [,] massiv = RandArr_x2(-10, 10, m, n);
+WriArr_x2(massiv);
+
+Введите количество строк:     3
+Введите количество столбцов:  6
+  8.0   6.0   4.2  -5.3   7.2   8.5
+  1.5  -8.4   7.1   8.9   8.0   7.5
+ -4.7  -2.5   5.4  -5.7  -5.0   4.2
