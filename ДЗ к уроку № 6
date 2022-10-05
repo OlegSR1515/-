@@ -1,0 +1,53 @@
+///  Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
+///    заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
+///    значения b1, k1, b2 и k2 задаются пользователем.
+
+/* Метод 'Wri_intArr' принимает строку из цифр, разделённых запятыми и пробелов,
+    удаляет пробелы и последнюю запятую. Возвращает массив целых чисел*/
+int[] Wri_intArr(string? stroka) {
+int i_possimv = Convert.ToInt32(stroka?.Length-1);
+
+if (i_possimv + 1 == 0 ) { Console.WriteLine("    Вы не ввели ни одного элемента!");
+    Environment.Exit( 0 );}
+if (Convert.ToString(stroka?[i_possimv]) == "," ) { stroka = stroka?.Remove(i_possimv);
+    i_possimv-- ;                                  }
+for (int i = 0; i < i_possimv + 1; i++ )        {
+    if (Convert.ToString(stroka?[i]) == " " ) {  stroka = stroka?.Remove(i,1) ; 
+        i_possimv--;
+        i--;                                   } }
+int kol_elem = 1;
+for (int i = 0; i < stroka?.Length; i++ )  if (Convert.ToString(stroka[i]) == "," ) kol_elem++ ;
+int[] array = new int[ kol_elem ];
+string arrstr = "";
+int k = 0;
+for (int n = 0; n < stroka?.Length; n++ ) { 
+    if (Convert.ToString(stroka?[n]) != ",")   arrstr = arrstr + Convert.ToString(stroka?[n]);
+    else    {  array[k] = Convert.ToInt32(arrstr);
+        arrstr = "";
+        k++; }                             }  
+array[k] = Convert.ToInt32(arrstr);
+return array;                      }
+
+// Метод 'Peres' выводит координаты точки пересечения двух прямых
+void Peres(float k_01, float b_01, float k_02, float b_02){                        
+if(k_01 == k_02) Console.WriteLine("Прямые параллельны.");
+else { float x = (b_02-b_01)/(k_01-k_02);
+float y = x * k_01 + b_01;;
+Console.Write("Прямые пересекаются в точке с координатами X = {0,5:0.000}" , x ); 
+Console.WriteLine("   Y = {0,5:0.000}",y );  } }
+//
+//
+Console.Write("Введите коэффициенты графика b1, k1 для первой прямой: ");
+string? prst_1 = Console.ReadLine();
+float b1 = Convert.ToSingle(Wri_intArr(prst_1)[0]);
+float k1 = Convert.ToSingle(Wri_intArr(prst_1)[1]);  
+Console.Write("Введите коэффициенты графика b2, k2 для второй прямой: ");
+string? prst_2 = Console.ReadLine();
+float b2 = Convert.ToSingle(Wri_intArr(prst_2)[0]);
+float k2 = Convert.ToSingle(Wri_intArr(prst_2)[1]);  
+Peres(k1, b1, k2, b2);
+**************** Вывод в консоль ***************************
+
+Введите коэффициенты графика b1, k1 для первой прямой: 2,5
+Введите коэффициенты графика b2, k2 для второй прямой: 4,9
+Прямые пересекаются в точке с координатами X = -0.500   Y = -0.500
