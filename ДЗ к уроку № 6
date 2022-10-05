@@ -45,3 +45,7 @@ string? prst_2 = Console.ReadLine();
 float b2 = Convert.ToSingle(Wri_intArr(prst_2)[0]);
 float k2 = Convert.ToSingle(Wri_intArr(prst_2)[1]);  
 Peres(k1, b1, k2, b2);
+
+**************** Вывод в консоль ***************************
+
+
