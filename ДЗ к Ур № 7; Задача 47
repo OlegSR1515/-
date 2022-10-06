@@ -1,0 +1,82 @@
+/// Задача 47: Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+/// m = 3, n = 4.
+
+/* Метод 'RandArr_x2' создает двумерный массив из случайных элементов вещественного типа
+ с 'zn' знаков после запятой. Массив имеет 'mm' строк, 'nn' столбцов и границы 'xSt' и 'xFi' */
+float [,] RandArr_x2(int xSt, int xFi, int mm, int nn, int zn) {
+    float [,] arramat = new float [mm , nn];
+    Random rand = new Random(); 
+    for (int i = 0; i < mm; i++ )                { 
+        for (int j = 0; j < nn; j++ )          {
+            arramat[i , j] = rand.Next(xSt * 100000, xFi * 100000);
+            arramat[i , j] = Convert.ToSingle(Math.Round(arramat[i , j] / 100000 , zn));} }
+return  arramat;                                         }
+//*****************************************
+/* Метод 'WriArr_x2' выводит двумерный массив 'arr_m' вещественных чисед в консоль 
+        и выравнивает столбцы по правому краю */
+void WriArr_x2(float[,] arr_m)     {  
+int maxkolzn = 0;    
+for (int i = 0; i < arr_m.GetLength(0); i++ )  {
+    for (int j = 0; j < arr_m.GetLength(1); j++ )  { 
+        float tek_elem = arr_m[i , j];
+        string dlstr = Convert.ToString(tek_elem);
+        if (Convert.ToInt32(dlstr.Length) > maxkolzn) maxkolzn = Convert.ToInt32(dlstr.Length); }}
+for (int ii = 0; ii < arr_m.GetLength(0); ii++ )  {
+    for (int jj = 0; jj < arr_m.GetLength(1); jj++ ) {  
+        float elem = arr_m[ii , jj];
+        string kolzn = Convert.ToString(elem);
+        int kol = Convert.ToInt32(kolzn.Length);
+        string probel = new string (' ', maxkolzn - kol + 1); 
+        Console.Write(probel);
+        Console.Write(elem);
+        Console.Write("  ");}
+    Console.Write("  ");
+Console.WriteLine();   }}
+//***************************************** 
+Console.Write("Ведите нижнюю границу массива:   ");
+int ng = Convert.ToInt32(Console.ReadLine());
+Console.Write("Ведите верхнюю границу массива:  ");
+int vg = Convert.ToInt32(Console.ReadLine());
+Console.Write("Ведите количество строк:          ");
+int kl_str = Convert.ToInt32(Console.ReadLine());
+Console.Write("Ведите количество столбцов:       ");
+int kl_slb = Convert.ToInt32(Console.ReadLine());
+Console.Write("Ведите количество знаков после запятой: ");
+int zn_zap = Convert.ToInt32(Console.ReadLine());
+
+float [,] massiv = RandArr_x2(ng, vg, kl_str, kl_slb, zn_zap);
+WriArr_x2(massiv);
+
+**************** Вывод в консоль ****************
+
+Ведите нижнюю границу массива:   1
+Ведите верхнюю границу массива:  100
+Ведите количество строк:          3
+Ведите количество столбцов:       4
+Ведите количество знаков после запятой: 2
+ 10.99   96.62   49.27   92.72
+  85.6   61.88   69.03   63.04
+ 75.12    2.53   24.01   59.52
+ 
+Ведите нижнюю границу массива:   -10
+Ведите верхнюю границу массива:  10
+Ведите количество строк:          4
+Ведите количество столбцов:       5
+Ведите количество знаков после запятой: 5
+  9.19375    6.24577    0.83122    7.51165   -3.04914
+  8.39832   -2.75337   -0.99856   -7.01572   -9.84424
+  9.26875   -6.46072    7.07707    0.58895    7.01508
+ -0.99113    0.83568   -3.56942   -5.28235   -2.62364
+ 
+ Ведите нижнюю границу массива:   -99
+Ведите верхнюю границу массива:  100
+Ведите количество строк:          5
+Ведите количество столбцов:       7
+Ведите количество знаков после запятой: 0
+  44    96     2    58   -72    10    30
+  94    11    97   -82   -91    34    22
+ -95   -26   -32    -1    89    79   100
+  82   -18   -59     1    15    17   -98
+ -92   -12     5    25    53    24   -89
+ 
+ 
