@@ -1,0 +1,46 @@
+/// Задача 52: Задайте двумерный массив из целых чисел.
+/// Найдите среднее арифметическое элементов в каждом столбце.
+
+/* Метод 'RandArrInt_x2' создает двумерный массив из случайных целых чисел 
+                  с 'iim' строками, 'iin' столбцами и границами 'xSt' и 'xFi' */
+int [,] RandArrInt_x2(int xSt, int xFi, int iim, int iin) {
+    int [,] arrmatin = new int [iim , iin];
+    Random rand = new Random(); 
+    for (int i = 0; i < iim; i++ )                 { 
+        for (int j = 0; j < iin; j++ )           {
+            arrmatin[i , j] = rand.Next(xSt, xFi);} }
+return  arrmatin;                                          }
+//*****************************************
+/* Метод 'WriArrInt_x2' получает целочисленный двумерный массив.
+        Выводит  массив 'arr_m' в консоль в виде матрицы и выравнивает элементы по столбцам*/
+void WriArrInt_x2(int[,] arr_mint)                 {
+for (int i = 0; i < arr_mint.GetLength(0); i++ ) {
+    for (int j = 0; j < arr_mint.GetLength(1); j++ ) Console.Write("{0,2:0} ", arr_mint[i , j]);  
+        Console.WriteLine();                      } }
+//***************************************** 
+int[,] massivInt = RandArrInt_x2(1, 10, 3, 4); 
+for (int j = 0; j < massivInt.GetLength(1); j++)  {
+    float araver = 0;
+    for (int i = 0; i < massivInt.GetLength(0); i++) araver = araver + massivInt[i , j];  
+    araver = araver / massivInt.GetLength(0);
+    Console.Write($"Среднее арифметическое {j+1} столбца:  ");
+    Console.WriteLine("{0,2:0.00} ",  araver);     }
+WriArrInt_x2(massivInt);
+
+**************** Вывод в консоль ******************
+
+Среднее арифметическое 1 столбца:  4.67
+Среднее арифметическое 2 столбца:  6.67
+Среднее арифметическое 3 столбца:  4.00
+Среднее арифметическое 4 столбца:  6.67
+ 4  8  5  6
+ 8  3  5  8
+ 2  9  2  6
+ 
+Среднее арифметическое 1 столбца:  4.67
+Среднее арифметическое 2 столбца:  7.00
+Среднее арифметическое 3 столбца:  6.33
+Среднее арифметическое 4 столбца:  5.33
+ 8  9  8  5
+ 2  9  4  7
+ 4  3  7  4
