@@ -1,0 +1,67 @@
+/// Задача 54: Задайте двумерный массив. Напишите программу,
+///           которая упорядочит по убыванию элементы каждой строки двумерного массива.
+
+/* Метод 'RandArr_x2' создает двумерный массив из случайных элементов вещественного типа
+ с 'zn' знаков после запятой. Массив имеет 'mm' строк, 'nn' столбцов и границы 'xSt' и 'xFi' */
+float [,] RandArr_x2(int xSt, int xFi, int mm, int nn, int zn) {
+    float [,] arramat = new float [mm , nn];
+    Random rand = new Random(); 
+    for (int i = 0; i < mm; i++ )                { 
+        for (int j = 0; j < nn; j++ )          {
+            arramat[i , j] = rand.Next(xSt * 100000, xFi * 100000);
+            arramat[i , j] = Convert.ToSingle(Math.Round(arramat[i , j] / 100000 , zn));} }
+return  arramat;                                         }
+//*****************************************
+/* Метод 'WriArr_x2' выводит двумерный массив 'arr_m' вещественных чисед в консоль 
+        и выравнивает столбцы по правому краю */
+void WriArr_x2(float[,] arr_m)     {  
+int maxkolzn = 0;    
+for (int i = 0; i < arr_m.GetLength(0); i++ )  {
+    for (int j = 0; j < arr_m.GetLength(1); j++ )  { 
+        float tek_elem = arr_m[i , j];
+        string dlstr = Convert.ToString(tek_elem);
+        if (Convert.ToInt32(dlstr.Length) > maxkolzn) maxkolzn = Convert.ToInt32(dlstr.Length); }}
+for (int ii = 0; ii < arr_m.GetLength(0); ii++ )  {
+    for (int jj = 0; jj < arr_m.GetLength(1); jj++ ) {  
+        float elem = arr_m[ii , jj];
+        string kolzn = Convert.ToString(elem);
+        int kol = Convert.ToInt32(kolzn.Length);
+        string probel = new string (' ', maxkolzn - kol + 1); 
+        Console.Write(probel);
+        Console.Write(elem);
+        Console.Write("  ");}
+    Console.Write("  ");
+Console.WriteLine();   }}
+//***************************************** 
+Console.WriteLine("Заданный массив:");
+float [,] massiv = RandArr_x2(-10, 10, 4, 4, 1);
+ WriArr_x2(massiv);
+
+for (int i = 0; i < massiv.GetLength(0); i++)                   {    
+    for (int jj = 0; jj < massiv.GetLength(1) - 1; jj++)       {
+        int nom = jj;
+        float maxelem = massiv[i , jj];
+        for (int j = jj + 1; j < massiv.GetLength(1); j++)  {
+            if (massiv[i  , j] > maxelem) {
+                maxelem = massiv[i  , j];
+                nom = j;                   }                  } 
+        massiv[i , nom] = massiv[i , jj];                                             
+        massiv[i , jj] = maxelem;                               } }
+ 
+Console.WriteLine(new string ('-', 26));
+Console.WriteLine("Упорядоченный массив:");
+WriArr_x2(massiv);
+
+ ************** Вывод в консоль *****************
+ 
+ Заданный массив:
+ -3.4   -4.6    0.8    8.2
+ -5.9     -3    5.2    1.9
+ -8.3    2.4   -3.3   -8.7
+  6.3    3.9    2.9    4.5
+--------------------------
+Упорядоченный массив:
+  8.2    0.8   -3.4   -4.6
+  5.2    1.9     -3   -5.9
+  2.4   -3.3   -8.3   -8.7
+  6.3    4.5    3.9    2.9
