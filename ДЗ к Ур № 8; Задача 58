@@ -1,0 +1,96 @@
+/// Задача 58: Задайте две матрицы. Напишите программу,
+/// которая будет находить произведение двух матриц.
+
+/* Метод 'RandArr_x2' создает двумерный массив из случайных элементов вещественного типа
+ с 'zn' знаков после запятой. Массив имеет 'mm' строк, 'nn' столбцов и границы 'xSt' и 'xFi' */
+float [,] RandArr_x2(int xSt, int xFi, int mm, int nn, int zn) {
+    float [,] arramat = new float [mm , nn];
+    Random rand = new Random(); 
+    for (int i = 0; i < mm; i++ )                                                        { 
+        for (int j = 0; j < nn; j++ )                                                  {
+            arramat[i , j] = rand.Next(xSt * 100000, xFi * 100000);
+            arramat[i , j] = Convert.ToSingle(Math.Round(arramat[i , j] / 100000 , zn)); } }
+return  arramat;                                                 }
+//*****************************************
+/* Метод 'WriArr_x2' выводит двумерный массив 'arr_m' вещественных чисед в консоль 
+        и выравнивает столбцы по правому краю */
+void WriArr_x2(float[,] arr_m)                       {  
+int maxkolzn = 0;    
+for (int i = 0; i < arr_m.GetLength(0); i++ )                                                   {
+    for (int j = 0; j < arr_m.GetLength(1); j++ )                                             { 
+        float tek_elem = arr_m[i , j];
+        string dlstr = Convert.ToString(tek_elem);
+        if (Convert.ToInt32(dlstr.Length) > maxkolzn) maxkolzn = Convert.ToInt32(dlstr.Length); } }
+for (int ii = 0; ii < arr_m.GetLength(0); ii++ )   {
+    for (int jj = 0; jj < arr_m.GetLength(1); jj++ )  {  
+        float elem = arr_m[ii , jj];
+        string kolzn = Convert.ToString(elem);
+        int kol = Convert.ToInt32(kolzn.Length);
+        string probel = new string (' ', maxkolzn - kol + 1); 
+        Console.Write(probel);
+        Console.Write(elem);
+        Console.Write("  ");                            }
+    Console.Write("  ");
+Console.WriteLine();                                 } }
+//***************************************** 
+// Количество столбцов первой матрицы должно быть равно
+// количеству строк второй матрицы.
+Console.Write($"Введите количество строк первой матрицы:  ");
+int m01 = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите количество столбцов первой матрицы:  ");
+int n01 = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите количество строк второй матрицы:  ");
+int m02 = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите количество столбцов второй матрицы:  ");
+int n02 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine(new string('-' , 45));
+if (n01 != m02)  { Console.WriteLine("Количество столбцов первой матрицы должно быть равно ");
+    Console.WriteLine("количеству строк второй матрицы. ");}
+else {
+    float [,] matrix_01 = RandArr_x2(-10, 10, m01, n01, 0);
+    float [,] matrix_02 = RandArr_x2(-10, 10, m02, n02, 0);
+    float [,]  matrix_pr = new float [matrix_01.GetLength(0),matrix_02.GetLength(1)];
+    Console.WriteLine("Первая матрица:");
+    WriArr_x2(matrix_01);
+    Console.WriteLine("Вторая матрица:");
+    WriArr_x2(matrix_02);
+
+    for (int i =0; i < matrix_01.GetLength(0); i++)                                     {
+        for (int j = 0; j < matrix_02.GetLength(1); j++)                              {
+            matrix_pr[i,j] = 0;
+            for (int jj = 0; jj < matrix_01.GetLength(1); jj++)                     {
+                matrix_pr[i,j] = matrix_pr[i,j] + matrix_01[i,jj] * matrix_02[jj,j];  } } }
+    Console.WriteLine("Произведение матриц:");        
+    WriArr_x2(matrix_pr);        
+    Console.WriteLine();
+     }
+     
+ ************** Вывод в консоль *****************
+ 
+Введите количество строк первой матрицы:  4
+Введите количество столбцов первой матрицы:  3
+Введите количество строк второй матрицы:  4
+Введите количество столбцов второй матрицы:  2
+---------------------------------------------
+Количество столбцов первой матрицы должно быть равно
+количеству строк второй матрицы.
+
+Введите количество строк первой матрицы:  4
+Введите количество столбцов первой матрицы:  3
+Введите количество строк второй матрицы:  3
+Введите количество столбцов второй матрицы:  5
+---------------------------------------------
+Первая матрица:
+   3     8     2
+  -6     2    -7
+  -6     0   -10
+  -6     5    -5
+Вторая матрица:
+  3    8    5    3    8
+ -7   -5   -4    1    1
+  5   -7   -3    4   -3
+Произведение матриц:
+ -37   -30   -23    25    26
+ -67    -9   -17   -44   -25
+ -68    22     0   -58   -18
+ -78   -38   -35   -33   -28
