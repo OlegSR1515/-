@@ -1,0 +1,62 @@
+/// Задача 56: Задайте прямоугольный двумерный массив.
+/// Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+
+/* Метод 'RandArr_x2' создает двумерный массив из случайных элементов вещественного типа
+ с 'zn' знаков после запятой. Массив имеет 'mm' строк, 'nn' столбцов и границы 'xSt' и 'xFi' */
+float [,] RandArr_x2(int xSt, int xFi, int mm, int nn, int zn) {
+    float [,] arramat = new float [mm , nn];
+    Random rand = new Random(); 
+    for (int i = 0; i < mm; i++ )                { 
+        for (int j = 0; j < nn; j++ )          {
+            arramat[i , j] = rand.Next(xSt * 100000, xFi * 100000);
+            arramat[i , j] = Convert.ToSingle(Math.Round(arramat[i , j] / 100000 , zn));} }
+return  arramat;                                         }
+//*****************************************
+/* Метод 'WriArr_x2' выводит двумерный массив 'arr_m' вещественных чисед в консоль 
+        и выравнивает столбцы по правому краю */
+void WriArr_x2(float[,] arr_m)     {  
+int maxkolzn = 0;    
+for (int i = 0; i < arr_m.GetLength(0); i++ )  {
+    for (int j = 0; j < arr_m.GetLength(1); j++ )  { 
+        float tek_elem = arr_m[i , j];
+        string dlstr = Convert.ToString(tek_elem);
+        if (Convert.ToInt32(dlstr.Length) > maxkolzn) maxkolzn = Convert.ToInt32(dlstr.Length); }}
+for (int ii = 0; ii < arr_m.GetLength(0); ii++ )  {
+    for (int jj = 0; jj < arr_m.GetLength(1); jj++ ) {  
+        float elem = arr_m[ii , jj];
+        string kolzn = Convert.ToString(elem);
+        int kol = Convert.ToInt32(kolzn.Length);
+        string probel = new string (' ', maxkolzn - kol + 1); 
+        Console.Write(probel);
+        Console.Write(elem);
+        Console.Write("  ");}
+    Console.Write("  ");
+Console.WriteLine();   }}
+//***************************************** 
+Console.WriteLine("Заданный массив:");
+float [,] massiv = RandArr_x2(-10, 10, 5, 6, 0);
+ WriArr_x2(massiv);
+float minsumm = 0;
+int minnom = 0;
+for (int i = 0; i < massiv.GetLength(0); i++) {    
+
+    float sumstr = 0;
+    int nomstr = 0;
+    for (int j = 0; j < massiv.GetLength(1); j++) sumstr = sumstr + massiv[i  , j];  
+    nomstr = i + 1;
+    if (sumstr < minsumm) {
+        minsumm = sumstr;
+        minnom = nomstr;    }                   }
+Console.WriteLine(new string ('-', 30));        
+Console.WriteLine($"Минимальная сумма в {minnom} строке: {minsumm}"); 
+
+ ************** Вывод в консоль *****************
+ 
+ Заданный массив:
+   9    -9     8     3    -7     7
+   1     8    -4     8     7     3
+   5    -6     6    -7     2     7
+   1    -1    -5    -5    -8     1
+   6    10    -7     9   -10     9
+------------------------------
+Минимальная сумма в 4 строке: -17
