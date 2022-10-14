@@ -1,0 +1,38 @@
+// Задача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. 
+//Даны два неотрицательных числа m и n.
+// m = 2, n = 3 -> A(m,n) = 9
+
+int Func_akk(int m , int n)  {
+if (m == 0)   return n + 1;  
+    if (m > 0) {
+        if (n == 0) return Func_akk(m - 1, 1);
+            if (n > 0) return Func_akk(m - 1, Func_akk(m , n - 1));
+            else return - 1;}
+        else return - 1;}
+
+Console.Write($"Введите значение M:  ");
+
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите значение N:  ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine(new string('-' , 25));
+if (Func_akk(m , n) == -1) Console.WriteLine("Вы ввели отрицательные числа");
+else Console.WriteLine($"m = {m}, n = {n} -> A(m,n) = {Func_akk(m , n)}");
+
+**************** Вывод в консоль ****************
+
+Введите значение M:  2
+Введите значение N:  3
+-------------------------
+m = 2, n = 3 -> A(m,n) = 9
+
+Введите значение M:  3
+Введите значение N:  2
+-------------------------
+m = 3, n = 2 -> A(m,n) = 29
+
+Введите значение M:  -2
+Введите значение N:  1
+-------------------------
+Вы ввели отрицательные числа
