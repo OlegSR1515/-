@@ -1,0 +1,28 @@
+// Задача 66: Задайте значения M и N. Напишите программу,
+// которая найдёт сумму натуральных элементов в промежутке от M до N.
+// M = 1; N = 15 -> 120
+// M = 4; N = 8. -> 30
+
+int Natur_summ(int i , int j)  {
+if (i == j)   return i;  
+return i + Natur_summ(i + 1 , j);
+}
+Console.Write($"Введите значение M:  ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write($"Введите значение N:  ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine(new string('-' , 25));
+Console.WriteLine($"M = {m}; N = {n} -> {Natur_summ(m , n)}");
+
+**************** Вывод в консоль ****************
+
+Введите значение M:  1
+Введите значение N:  15
+-------------------------
+M = 1; N = 15 -> 120
+
+Введите значение M:  4
+Введите значение N:  8
+-------------------------
+M = 4; N = 8 -> 30
